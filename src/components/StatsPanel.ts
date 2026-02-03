@@ -14,6 +14,7 @@ export class StatsPanel {
             <dt>inner</dt><dd>${state.innerWidth} x ${state.innerHeight}</dd>
             <dt>canvas</dt><dd>${state.canvasWidth} x ${state.canvasHeight}</dd>
             <dt>shapes</dt><dd>${state.shapeCount}</dd>
+            <dt>position</dt><dd>${state.nextPosition?.x || 0} x ${state.nextPosition?.y || 0}</dd>
         </dl>
         `;
     }

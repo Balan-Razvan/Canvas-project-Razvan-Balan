@@ -7,6 +7,7 @@ export interface WindowState {
     shapeCount: number;
     canvasHeight: number;
     canvasWidth: number;
+    nextPosition: Point2d | null;
 }
 
 // pozitie
