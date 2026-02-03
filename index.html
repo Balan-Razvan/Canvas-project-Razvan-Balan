@@ -1,38 +1,39 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Canvas Project</title>
-</head>
-<body>
+    <link rel="stylesheet" href="./styles/main.css" />
+  </head>
+  <body>
     <div id="window-state" class="window-state"></div>
 
     <main class="app">
-        <aside class="controls">
-            <h2>Place shape</h2>
-            <label>
-                Type
-                <select id="shape-type">
-                    <option value="circle">Circle</option>
-                    <option value="square">Square</option>
-                </select>
-            </label>
-            <label>
-                Color
-                <input type="color" id="shape-color" value="#eb82f6" />
-            </label>
-            <label>
-                Size
-                <input type="range" id="shape-size" min="20" max="80" value="40" />
-            </label>
-            <button type="button" id="btn-place">Place on canvas</button>
-        </aside>
-        <div class="canvas-wrapper">
-            <canvas id="canvas"></canvas>
-        </div>
+      <aside class="controls">
+        <h2>Place shape</h2>
+        <label>
+          Type
+          <select id="shape-type">
+            <option value="circle">Circle</option>
+            <option value="rectangle">Rectangle</option>
+          </select>
+        </label>
+        <label>
+          Color
+          <input type="color" id="shape-color" value="#3b82f6" />
+        </label>
+        <label>
+          Size <span id="size-value">40</span>
+          <input type="range" id="shape-size" min="20" max="80" value="40" />
+        </label>
+        <button type="button" id="btn-place">Place on canvas</button>
+      </aside>
+      <div class="canvas-wrap">
+        <canvas id="canvas"></canvas>
+      </div>
     </main>
 
     <script type="module" src="./src/app.ts"></script>
-</body>
+  </body>
 </html>
