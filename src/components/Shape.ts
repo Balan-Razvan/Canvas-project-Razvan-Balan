@@ -1,5 +1,15 @@
 import { Point2d, shapeKind } from "../abstract/types.ts";
 
+
+
+export interface Bounds {
+    left: number,
+    right: number,
+    top: number,
+    bottom: number,
+};
+
+
 // forma basic de shape, pozitie, culoare, marime, tip
 export abstract class Shape {
   position: Point2d;
@@ -21,4 +31,6 @@ export abstract class Shape {
 
   // functie pt rendare in canvas
   abstract draw(ctx: CanvasRenderingContext2D): void;
+
+  abstract getBounds(): Bounds;
 }
