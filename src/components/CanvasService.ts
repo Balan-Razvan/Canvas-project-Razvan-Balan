@@ -1,5 +1,5 @@
 import { createshape} from "../abstract/createShape.ts";
-import { type Shape } from "./Shape.ts";
+import { type Shape, type Bounds } from "./Shape.ts";
 import type { ShapeOptions } from "../abstract/types.ts";
 
 export class CanvasService {
@@ -19,6 +19,10 @@ export class CanvasService {
         window.addEventListener('resize', () => this.resize());
     }
 
+    private boundsOverlap(a: Bounds, b: Bounds): boolean {
+        return !(a.right < b.left || a.left > b.right || a.bottom < b.top ||a.top > b.bottom);
+    }
+
     private resize(): void {
         const dpr = window.devicePixelRatio ?? 1;
         const rect = this.canvas.getBoundingClientRect();
@@ -28,7 +32,7 @@ export class CanvasService {
         this.redraw();
     }
 
-    placeShape(options: Partial<ShapeOptions> & { kind: ShapeOptions['kind'] }) : Shape {
+    placeShape(options: Partial<ShapeOptions> & { kind: ShapeOptions['kind'] }) : Shape | null{
         const full: ShapeOptions = {
             kind: options.kind,
             position: options.position ?? {
@@ -39,6 +43,14 @@ export class CanvasService {
             size: options.size ?? 40,
         };
         const shape = createshape(full);
+
+        const newBounds = shape.getBounds();
+        for(const existing of this.shapes) {
+            if (this.boundsOverlap(newBounds, existing.getBounds())){
+                return null;
+            }
+        }
+
         this.shapes.push(shape);
         this.redraw();
         return shape;

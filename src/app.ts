@@ -52,12 +52,15 @@ btnPlace.addEventListener('click', () => {
     const kind = shapeType.value as shapeKind;
     const color = shapeColor.value;
     const size = Number(shapeSize.value);
-    canvasService.placeShape({
+    const result = canvasService.placeShape({
         kind, 
         color,
         size,
         position: nextPosition ?? undefined,
     });
+    if(result === null){
+        alert('that spot is taken');
+    }
     refreshStats();
 });
 
