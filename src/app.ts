@@ -21,12 +21,28 @@ const statsPanel = new StatsPanel(statsEl);
 
 let nextPosition: Point2d | null = null;
 
+
+function getPreviewOptions(): { kind: shapeKind; position: Point2d; color: string; size: number } | null {
+    if(!nextPosition) return null;
+    return {
+        kind: shapeType!.value as shapeKind,
+        position: nextPosition,
+        color: shapeColor!.value,
+        size: Number(shapeSize!.value),
+    }
+}
+
+function updatePreview(): void {
+    canvasService.setPreview(getPreviewOptions());
+}
+
 canvasEl.addEventListener('click', (e: MouseEvent) => {
     const rect = canvasEl.getBoundingClientRect();
     nextPosition = {
         x: e.clientX - rect.left,
         y: e.clientY - rect.top,
     };
+    updatePreview();
     refreshStats();
 });
 
@@ -46,7 +62,11 @@ function refreshStats(): void {
 
 shapeSize.addEventListener('input', () => {
     sizeValueSpan.textContent = shapeSize.value;
+    updatePreview();
 });
+
+shapeType.addEventListener('change', updatePreview);
+shapeColor.addEventListener('input', updatePreview);
 
 btnPlace.addEventListener('click', () => {
     const kind = shapeType.value as shapeKind;
@@ -60,6 +80,8 @@ btnPlace.addEventListener('click', () => {
     });
     if(result === null){
         alert('that spot is taken');
+    } else {
+        canvasService.setPreview(null);
     }
     refreshStats();
 });

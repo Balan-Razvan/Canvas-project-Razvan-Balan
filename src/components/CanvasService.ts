@@ -6,6 +6,7 @@ export class CanvasService {
     private canvas: HTMLCanvasElement;
     private ctx: CanvasRenderingContext2D;
     private shapes: Shape[] = [];
+    private preview: ShapeOptions | null = null;
 
     constructor(canvasEl: HTMLCanvasElement) {
         this.canvas = canvasEl;
@@ -29,6 +30,11 @@ export class CanvasService {
         this.canvas.width = Math.round(rect.width * dpr);
         this.canvas.height = Math.round(rect.height * dpr);
         this.ctx.scale(dpr, dpr);
+        this.redraw();
+    }
+
+    setPreview(options: ShapeOptions | null): void {
+        this.preview = options;
         this.redraw();
     }
 
@@ -72,6 +78,13 @@ export class CanvasService {
         this.ctx.clearRect(0, 0, w, h);
         for(const shape of this.shapes) {
             shape.draw(this.ctx);
+        }
+        if(this.preview) {
+            const ghost = createshape(this.preview);
+            this.ctx.save();
+            this.ctx.globalAlpha = 0.3;
+            ghost.draw(this.ctx);
+            this.ctx.restore();
         }
     }
 
