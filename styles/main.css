@@ -1,42 +1,47 @@
 * {
-  box-sizing: border-box;
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
- 
+
+:root {
+  --border: #d0d0d0;
+  --text: #222;
+  --bg: #fff;
+  --radius: 6px;
+  --space: 1rem;
+  --font: system-ui, sans-serif;
+
+  --shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
 body {
-  font-family: sans-serif;
-  padding: 1rem;
+  font-family: var(--font);
+  color: var(--text);
+  background: #f7f7f8;
+  padding: var(--space);
   min-height: 150vh;
+  line-height: 1.45;
 }
- 
+
 .window-state {
   position: fixed;
-  top: 0.5rem;
-  right: 0.5rem;
-  padding: 0.5rem;
-  background: #fff;
-  border: 1px solid #000;
-  font-size: 12px;
+  top: 0.75rem;
+  right: 0.75rem;
+  padding: 0.75rem;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  font-size: 0.85rem;
   z-index: 1000;
 
   display: grid;
   grid-template-columns: auto 1fr;
-  gap: 0.25rem 0.5rem;
-  align-items: start;
-
-  box-sizing: border-box;
-  max-width: min(320px, 90vw);
-  max-height: min(60vh, 90vh);
+  gap: 0.35rem 0.75rem;
+  max-width: min(340px, 85vw);
+  max-height: min(60vh, 85vh);
   overflow: auto;
-}
-
-.window-state dl {
-  margin: 0;
-}
-.window-state dt,
-.window-state dd {
-  margin: 0;
 }
 
 .window-state dt {
@@ -45,39 +50,60 @@ body {
 }
 .window-state dd {
   overflow-wrap: anywhere;
-  min-width: 0;       
+  min-width: 0;
 }
- 
 .app {
   display: flex;
-  gap: 1rem;
+  gap: 1.5rem;
+  margin-top: 1rem;
+  flex-wrap: wrap; 
 }
- 
+
 .controls {
-  width: 180px;
-  padding: 1rem;
-  border: 1px solid #000;
+  flex: 0 0 200px;
+  padding: 1.25rem;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
 }
- 
+
 .controls label {
   display: block;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.75rem;
+  font-weight: 500;
 }
- 
+
 .controls button {
+  display: inline-block;
+  padding: 0.4rem 0.8rem;
   margin-top: 0.5rem;
-  padding: 0.25rem 0.5rem;
+  border: none;
+  border-radius: var(--radius);
+  background: #007bff;
+  color: #fff;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background 0.2s;
 }
- 
+
+.controls button:hover {
+  background: #005fcc;
+}
+
 .canvas-wrap {
   flex: 1;
   min-height: 400px;
-  border: 1px solid #000;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 0.5rem;
 }
- 
+
 #canvas {
   display: block;
   width: 100%;
   min-height: 400px;
+  border-radius: var(--radius);
 }
- 
