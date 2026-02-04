@@ -10,5 +10,5 @@
 ## Pagina principala
 ![Canvas](./media/main.png)
 
-## Pagina welcome 
+## Pagina alert in caz de suprapunere 
 ![Alert Suprapunere](./media/alert.png)
